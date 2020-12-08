@@ -1,4 +1,4 @@
-require('dotenv').config();
+ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const {dbConnection} = require('./database/config');
@@ -11,17 +11,16 @@ const app = express();
 // configurar CORS
 app.use(cors());
 
+// Lectura y parse del body
+
+app.use( express.json() );
+
 dbConnection();
 
 
-app.get('/',(req,res)=>{
 
-    res.status(200).json({
-        ok:true,
-    msg:'Hola mundo'
-    })
-
-});
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/login', require('./routes/auth'));
 
 
 app.listen(process.env.PORT, ()=>
