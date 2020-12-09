@@ -26,6 +26,9 @@ app.use('/api/login', require('./routes/auth'));
 app.use('/api/todo', require('./routes/busquedas'));
 app.use('/api/upload', require('./routes/uploads'));
 
+// Directorio publico
+app.use(express.static('public'));
+
 
 app.listen(process.env.PORT, ()=>
 {
