@@ -12,9 +12,17 @@ if(!token){
     })
 }
 try {
-    const {uid } = jwt.verify(token, process.env.JWT_SECRET);
+    const {uid}  = jwt.verify(token, process.env.JWT_SECRET);
+ 
+    if(!uid){
+        return res.status(500).json({
+            ok:false,
+            msg:'No se pudo generar el uid'
+        })
+    }
     req.uid = uid;
     next();
+
 } catch (error) {
     return res.status(401).json({
         ok:false,
