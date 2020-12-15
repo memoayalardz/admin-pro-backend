@@ -6,14 +6,16 @@ const getTodo = async(req,res) => {
     const buscar = req.params.busqueda;
     const regex = new RegExp(buscar, 'i');
 
+
     const [usuarios,medicos,hospitales] = await Promise.all([
         Usuario.find({nombre:regex}),
         Medico.find({nombre:regex}),
         Hospital.find({nombre:regex})
     ]);
+
 /*     const usuarios = await Usuario.find({nombre:regex});
     const medicos = await Medico.find({nombre:regex});
-    const hospitales = await Hospital.find({nombre:regex}); */
+    const hospitales = await Hospital.find({nombre:regex});  */
 
     
     res.status(200).json({
