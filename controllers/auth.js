@@ -93,11 +93,22 @@ const googleSingin = async (req,res = response)=>{
 }
 
 const renewToken = async(req,res = response) =>{
-    const uid = res.uid;
-    const token = await generarJWT(uid);
+    const uid = req.uid;
+/*     const token = await generarJWT(uid); */
+
+
+    const [token, usuario] = await Promise.all([
+        generarJWT(uid),
+        Usuario.findById(uid),
+
+    ]);
+
+
+
     res.status(200).json({
         ok:true,
-        token
+        token,
+        usuario
     });
 }
 module.exports = {

@@ -13,7 +13,7 @@ router.put('/:tipo/:id',
     fileUpload
 );
 router.get('/:tipo/:foto',
-    validarJWT, 
+ /*    validarJWT,  */
     returnImage
 );
 
