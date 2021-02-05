@@ -4,6 +4,8 @@ const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
 const {googleVerify} = require('../helpers/googleVerify');
 const usuario = require('../models/usuario');
+const { getMenuFrontEnd } = require('../helpers/menu-frontend');
+
 
 const login = async (req,res = response)=>{
 try {
@@ -32,6 +34,7 @@ const usuarioDB = await Usuario.findOne({email});
     res.status(200).json({
         ok:true,
         msg:'Bienvenido',
+        menu:getMenuFrontEnd(usuarioDB.role),
         token
     })
 
@@ -80,6 +83,7 @@ const googleSingin = async (req,res = response)=>{
     res.status(200).json({
         ok:true,
         msg:'Google Singin',
+        menu:getMenuFrontEnd(usuario.role),
         token
     });
 } catch (error) {
@@ -108,6 +112,7 @@ const renewToken = async(req,res = response) =>{
     res.status(200).json({
         ok:true,
         token,
+        menu:getMenuFrontEnd(usuario.role),
         usuario
     });
 }
