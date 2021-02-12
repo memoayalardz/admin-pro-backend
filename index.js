@@ -30,7 +30,7 @@ app.use('/api/todo', require('./routes/busquedas'));
 app.use('/api/upload', require('./routes/uploads'));
 // lo ultimo
 app.get('*',(req,res)=>{
-    res.sendFile(path(__dirname,'public/index.html'));
+    res.sendfile(path.resolve(__dirname,'public/index.html'));
 })
 
 // Directorio publico
